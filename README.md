@@ -112,7 +112,6 @@ Give a ⭐ if you like this project, and share it with your friends!
 
 <p align="left">
   <a href="https://buymeacoffee.com/ritikaagrawal08"><img alt="Buy me a coffee" title="Buy me a coffee" src="https://img.shields.io/badge/-Buy%20me%20a%20coffee-yellow?style=for-the-badge&logo=buymeacoffee&logoColor=white"/></a>
-  <a href="https://github.com/sponsors/Ritika-Agrawal811"><img alt="Sponsor with Github" title="Sponsor with Github" src="https://img.shields.io/badge/-Sponsor-ea4aaa?style=for-the-badge&logo=github&logoColor=white"/></a>
 </p>
 
 <p align='center'>• • •</p>
