@@ -73,4 +73,12 @@ return [
         'tagBackground' => '#EAD2B7',
         'tagTitle' => '#5C4033',
     ],
+    'linux-user' => [
+        'background' => '#3b3b72',
+        'stroke' => '#ecb1b1',
+        'title' => '#8c8c9e',
+        'description' => '#9b78e6',
+        'tagBackground' => '#828f61',
+        'tagTitle' => '#2c2c54',
+    ],
 ];
