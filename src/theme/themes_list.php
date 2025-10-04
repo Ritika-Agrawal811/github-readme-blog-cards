@@ -81,4 +81,12 @@ return [
         'tagBackground' => '#828f61',
         'tagTitle' => '#2c2c54',
     ],
+    'cosmic' => [
+    'background' => '#0B1021',
+    'stroke' => '#2E2A68',
+    'title' => '#B9BFFF',
+    'description' => '#7A88CF',
+    'tagBackground' => '#1A1F3C',
+    'tagTitle' => '#C9CFFF',
+    ],
 ];
