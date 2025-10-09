@@ -104,6 +104,7 @@ To use a **theme**, append `&theme=` followed by a theme value available at the 
 |         `carbon`          |  <br/> <img src="https://res.cloudinary.com/djix6uusx/image/upload/v1754741699/blog-card-carbon_hd2jg7.png" width='250' height='300' />   |
 |         `dracula`         |  <br/> <img src="images/themes/dracula.svg" width='240' height='300' />  |
 |        `cosmic`           |  <br/> <img src="images/themes/cosmic.svg" width='240' height='300' />  |
+|        `ocean`           |  <br/> <img src="images/themes/ocean.svg" width='240' height='300' />  |
 
 <br/>
 
