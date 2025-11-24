@@ -92,115 +92,6 @@ class Card
     }
 
     /**
-     * Compress SVG
-     *
-     * @param array<string,string> blog metadata
-     * @return string compressed svg
-     */
-    private function compressSVG($meta)
-    {
-        $svgContent = $this->generateSVG($meta);
-
-        // Remove unnecessary whitespace but keep structure
-        $svgContent = preg_replace('/>\s+</', '><', $svgContent);
-
-        // Remove comments
-        $svgContent = preg_replace('/<!--.*?-->/', '', $svgContent);
-
-        // Optimize path data (round numbers to 1 decimal place)
-        $svgContent = preg_replace_callback(
-            '/(\d+\.\d{2,})/',
-            function ($matches) {
-                return round($matches[1], 1);
-            },
-            $svgContent,
-        );
-
-        // Remove unnecessary attributes
-        $svgContent = str_replace(' fill-opacity="1"', '', $svgContent);
-        $svgContent = str_replace(' stroke="none"', '', $svgContent);
-
-        return $svgContent;
-    }
-
-    /**
-     * Get the SVG for the blog card
-     *
-     * @param array<string,string> the metadata for the blog
-     * @return string the SVG for card
-     */
-    private function generateSVG($meta): string
-    {
-        // blog image
-        $imageSVG = $this->renderImage($meta);
-
-        // blog title
-        $titleData = $this->renderTitle($meta);
-        $titleSVG = $titleData['svg'];
-        $titleLines = $titleData['lineCount'];
-
-        // blog description
-        $descriptionSVG = $this->renderDescription($meta, $titleLines);
-
-        // blog website tag
-        $blogWebsiteTag = $this->renderBlogWebsiteTag($meta);
-
-        // card theme
-        $themeObj = new Theme($this->theme);
-        $theme = $themeObj->getTheme();
-
-        return "<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' style='isolation: isolate;' viewBox='0 0 {$this->cardWidth} {$this->cardHeight}' width='{$this->cardWidth}px' height='{$this->cardHeight}px'>
-            <style>
-
-                .title {
-                    font: bold {$this->titleFontSize}px sans-serif;
-                    fill: {$theme['title']};
-                }
-
-                .description {
-                    font: {$this->desciptionFontSize}px sans-serif;
-                    fill: {$theme['description']};
-                }
-
-                .card-bg {
-                    fill: {$theme['background']};
-                    stroke: {$theme['stroke']};
-                    stroke-width: 2;
-                    rx: 10;
-                    ry: 10;
-                }
-
-                .tag {
-                  fill: {$theme['tagBackground']};
-                  rx: 6; 
-                  ry: 6; 
-                }
-
-                .tagTitle {
-                    font: bold {$this->tagFontSize}px sans-serif;
-                    fill: {$theme['tagTitle']};
-                }
-
-            </style>
-
-            <!-- Card background -->
-            <rect class='card-bg' x='0' y='0' width='{$this->cardWidth}' height='{$this->cardHeight}' rx='10' ry='10'/>
-
-            <!-- Blog image (full width, half height) -->
-            {$imageSVG}
-
-             <!-- Title -->
-            {$titleSVG}
-
-            <!-- Description -->
-            {$descriptionSVG}
-
-            <!-- Blog Site Icon and Name -->
-            {$blogWebsiteTag}
-        </svg>";
-    }
-
-    /**
      * Fetch the HTML content for the blog URL and enforce the encoding to UTF-8
      *
      * @param string blog URL
@@ -280,7 +171,133 @@ class Card
             'image' => $tags['og:image'] ?? null,
             'site_name' => $siteName,
             'favicon' => $favicon,
+            'published_date' => $tags['article:published_time'] ?? ($tags['last-updated'] ?? 'No date'),
         ];
+    }
+
+    /**
+     * Compress SVG
+     *
+     * @param array<string,string> blog metadata
+     * @return string compressed svg
+     */
+    private function compressSVG($meta)
+    {
+        $svgContent = $this->generateSVG($meta);
+
+        // Remove unnecessary whitespace but keep structure
+        $svgContent = preg_replace('/>\s+</', '><', $svgContent);
+
+        // Remove comments
+        $svgContent = preg_replace('/<!--.*?-->/', '', $svgContent);
+
+        // Optimize path data (round numbers to 1 decimal place)
+        $svgContent = preg_replace_callback(
+            '/(\d+\.\d{2,})/',
+            function ($matches) {
+                return round($matches[1], 1);
+            },
+            $svgContent,
+        );
+
+        // Remove unnecessary attributes
+        $svgContent = str_replace(' fill-opacity="1"', '', $svgContent);
+        $svgContent = str_replace(' stroke="none"', '', $svgContent);
+
+        return $svgContent;
+    }
+
+    /**
+     * Get the SVG for the blog card
+     *
+     * @param array<string,string> the metadata for the blog
+     * @return string the SVG for card
+     */
+    private function generateSVG($meta): string
+    {
+        // blog image
+        $imageSVG = $this->renderImage($meta);
+
+        // blog title
+        $titleData = $this->renderTitle($meta);
+        $titleSVG = $titleData['svg'];
+        $titleLines = $titleData['lineCount'];
+
+        // blog description
+        $descriptionSVG = $this->renderDescription($meta, $titleLines);
+
+        // blog published date
+        $publishedDateSVG = $this->renderPublishedDate($meta);
+
+        // blog website tag
+        $blogWebsiteTag = $this->renderBlogWebsiteTag($meta);
+
+        // card theme
+        $themeObj = new Theme($this->theme);
+        $theme = $themeObj->getTheme();
+
+        return "<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' style='isolation: isolate;' viewBox='0 0 {$this->cardWidth} {$this->cardHeight}' width='{$this->cardWidth}px' height='{$this->cardHeight}px'>
+            <style>
+
+                .title {
+                    font: bold {$this->titleFontSize}px sans-serif;
+                    fill: {$theme['title']};
+                }
+
+                .description {
+                    font: {$this->desciptionFontSize}px sans-serif;
+                    fill: {$theme['description']};
+                }
+
+                .card-bg {
+                    fill: {$theme['background']};
+                    stroke: {$theme['stroke']};
+                    stroke-width: 2;
+                    rx: 10;
+                    ry: 10;
+                }
+
+                .tag {
+                  fill: {$theme['tagBackground']};
+                  rx: 6; 
+                  ry: 6; 
+                }
+
+                .tagTitle {
+                    font: bold {$this->tagFontSize}px sans-serif;
+                    fill: {$theme['tagTitle']};
+                }
+
+                .published_date {
+                    font: 400 {$this->tagFontSize}px sans-serif;
+                    fill: {$theme['description']};
+                }
+                
+                .clock-icon {
+                    stroke: {$theme['description']};
+                    stroke-width: 1.2;
+                }
+
+            </style>
+
+            <!-- Card background -->
+            <rect class='card-bg' x='0' y='0' width='{$this->cardWidth}' height='{$this->cardHeight}' rx='10' ry='10'/>
+
+            <!-- Blog image (full width, half height) -->
+            {$imageSVG}
+
+             <!-- Title -->
+            {$titleSVG}
+
+            <!-- Description -->
+            {$descriptionSVG}
+
+            <!-- Published Date -->
+            {$publishedDateSVG} 
+
+            <!-- Blog Site Icon and Name -->
+            {$blogWebsiteTag}
+        </svg>";
     }
 
     /**
@@ -425,6 +442,73 @@ class Card
             x='{$descriptionXPosition}' 
             y='{$descriptionYPosition}' 
             class='description'>{$descriptionSpans}</text> 
+        ";
+    }
+
+    /**
+     * Generate SVG for blog published date
+     *
+     * @param array<string,string> blog metadata
+     * @return string SVG for published date
+     */
+    private function renderPublishedDate($meta): string
+    {
+        $dateString = $meta['published_date'] ?? null;
+
+        if (!$dateString || $dateString === 'No date') {
+            $formattedDate = null;
+        } else {
+            try {
+                // Parse the ISO 8601 date
+                $dateObj = new DateTime($dateString);
+
+                // Format as "24 May, 2025"
+                $formattedDate = $dateObj->format('d M, Y');
+            } catch (Exception $e) {
+                $formattedDate = null;
+            }
+        }
+
+        if (!$formattedDate) {
+            return '';
+        }
+
+        $dateDimensions = [
+            'horizontal' => [
+                'x' => $this->cardWidth * 0.2 + $this->padding * 2,
+                'y' => $this->cardHeight - $this->padding * 2,
+            ],
+            'vertical' => [
+                'x' => $this->padding,
+                'y' => $this->cardHeight - $this->padding * 2,
+            ],
+        ];
+
+        $x = $dateDimensions[$this->layout]['x'];
+        $y = $dateDimensions[$this->layout]['y'];
+
+        $iconSize = 14;
+        $iconX = $x;
+        $textX = $x + $iconSize + 3;
+
+        return "
+        <!-- Clock Icon -->
+        <g transform='translate({$iconX}, " .
+            ($y - 9.5) .
+            ")'>
+            <!-- Clock circle -->
+            <circle cx='6' cy='6' r='6' class='clock-icon' fill='none'/>
+            <!-- Hour hand -->
+            <line x1='6' y1='6' x2='6' y2='3' class='clock-icon' stroke-linecap='round'/>
+            <!-- Minute hand -->
+            <line x1='6' y1='6' x2='9' y2='6' class='clock-icon' stroke-linecap='round'/>
+        </g>
+        
+        <!-- Date Text -->
+        <text 
+            x='{$textX}'
+            y='{$y}'
+            class='published_date'>{$formattedDate}</text>
         ";
     }
 
