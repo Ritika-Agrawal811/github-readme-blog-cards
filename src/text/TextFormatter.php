@@ -44,6 +44,20 @@ class TextFormatter
     }
 
     /**
+     * Get the X position to center a text
+     * @param string text
+     * @param int width
+     */
+    public function calculateTextCenterX(string $text): float
+    {
+        $textWidth = $this->calculateTextWidth($text);
+
+        $x = $this->cardWidth / 2 - $textWidth / 2 + 5;
+
+        return $x;
+    }
+
+    /**
      * Wrap text into multiple lines according to their width
      *
      * @param string text
@@ -111,7 +125,7 @@ class TextFormatter
     }
 
     /**
-     * Truncate text to fit wihtin the width
+     * Truncate text to fit within the width
      *
      * @param string the text
      * @param float maximum width for text

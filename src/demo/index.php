@@ -53,7 +53,10 @@ $defaultUrl = 'https://medium.com/@RitikaAgrawal08/exploring-css-flexbox-getting
                         <div class="select-wrapper">
                             <select id="theme" name="theme">
                                 <?php foreach ($themes as $name => $_): ?>
-                                    <option value="<?php echo htmlspecialchars($name); ?>" <?php echo $name === $defaultTheme ? 'selected' : ''; ?>>
+                                    <option value="<?php echo htmlspecialchars($name); ?>" <?php echo $name ===
+$defaultTheme
+    ? 'selected'
+    : ''; ?>>
                                         <?php echo htmlspecialchars(strtolower(str_replace('-', ' ', $name))); ?>
                                     </option>
                                 <?php endforeach; ?>
@@ -131,9 +134,13 @@ $defaultUrl = 'https://medium.com/@RitikaAgrawal08/exploring-css-flexbox-getting
                 <p id="preview-size"></p>
             </header>
             <div class="preview-stage">
-                <?php
-                  $initialSrc = '/?url=' . urlencode($defaultUrl) . '&layout=' . urlencode($defaultLayout) . '&theme=' . urlencode($defaultTheme);
-                ?>
+                <?php $initialSrc =
+                    '/?url=' .
+                    urlencode($defaultUrl) .
+                    '&layout=' .
+                    urlencode($defaultLayout) .
+                    '&theme=' .
+                    urlencode($defaultTheme); ?>
                 <button type="button" id="download-card" class="download-btn" aria-label="Download image">Download</button>
                 <img id="card-preview" alt="Blog card preview" src="<?php echo $initialSrc; ?>" />
             </div>

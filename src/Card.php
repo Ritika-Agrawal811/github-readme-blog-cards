@@ -92,7 +92,7 @@ class Card
     }
 
     /**
-     * compress SVG
+     * Compress SVG
      *
      * @param array<string,string> blog metadata
      * @return string compressed svg
@@ -287,6 +287,7 @@ class Card
      * Generate SVG for the blog image
      *
      * @param array<string,string> blog metadata
+     * @return string image SVG
      */
     private function renderImage($meta): string
     {
