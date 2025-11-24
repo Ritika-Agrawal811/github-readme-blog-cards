@@ -1,7 +1,7 @@
 /**
  *  set theme mode - light or dark
- */ 
-(function() {
+ */
+(function () {
   const btn = document.getElementById('theme-mode');
   if (!btn) return;
 
@@ -14,72 +14,72 @@
   btn.addEventListener('click', toggleThemeHandler);
   document.documentElement.setAttribute('data-theme', 'light');
   btn.textContent = 'Dark';
-
 })();
 
 /**
  * Update the image preview size when image loads
  */
-(function(){
+(function () {
   const previewImg = document.getElementById('card-preview');
   const previewSize = document.getElementById('preview-size');
 
   const updateSizeLabelHandler = () => {
-    const width = previewImg.naturalWidth ?? ''
-    const height = previewImg.naturalHeight ?? ''
+    const width = previewImg.naturalWidth ?? '';
+    const height = previewImg.naturalHeight ?? '';
 
     previewSize.textContent = `${width} × ${height}px`;
   };
 
   previewImg.addEventListener('load', updateSizeLabelHandler);
-
 })();
 
 /**
  * Copy the code
  */
-(function(){
-  const copyButtons = document.getElementsByClassName("copy-btn")
+(function () {
+  const copyButtons = document.getElementsByClassName('copy-btn');
 
   const copyCodeHandler = async (event) => {
-    const btn = event.currentTarget
+    const btn = event.currentTarget;
     const pre = btn.nextElementSibling;
 
-     try {
-       await navigator.clipboard.writeText(pre.textContent || '')
-       btn.textContent = 'Copied';
-       setTimeout(() => (btn.textContent = 'Copy'), 1200);
-     } catch (error) {
-        console.log("Failed to copy", error.message)
-     }
-  }
+    try {
+      await navigator.clipboard.writeText(pre.textContent || '');
+      btn.textContent = 'Copied';
+      setTimeout(() => (btn.textContent = 'Copy'), 1200);
+    } catch (error) {
+      console.log('Failed to copy', error.message);
+    }
+  };
 
-  Array.from(copyButtons).forEach(btn => {
-    btn.addEventListener('click', copyCodeHandler)
-  })
-
+  Array.from(copyButtons).forEach((btn) => {
+    btn.addEventListener('click', copyCodeHandler);
+  });
 })();
 
 /**
  * Download blog card SVG with the theme name
  */
-(function(){
+(function () {
   const downloadBtn = document.getElementById('download-card');
-  if(!downloadBtn) return;
+  if (!downloadBtn) return;
 
   const downloadCurrent = async () => {
     try {
       const themeSelect = document.getElementById('theme');
       const previewImg = document.getElementById('card-preview');
       const newThemeName = document.getElementById('new-theme-name');
-      
+
       const url = previewImg.src;
 
       // Determine filename based on mode:
       // - If custom theme preview is active: use new theme name (lowercase, spaces -> dashes)
       // - Else: use the currently selected built-in theme
-      const customKey = (newThemeName && newThemeName.value ? newThemeName.value : '').trim().toLowerCase().replace(/\s+/g, '-');
-      const filename = (customKey ? customKey : (themeSelect.value || 'card')) + '.svg';
+      const customKey = (newThemeName && newThemeName.value ? newThemeName.value : '')
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, '-');
+      const filename = (customKey ? customKey : themeSelect.value || 'card') + '.svg';
 
       const resp = await fetch(url, { credentials: 'same-origin' });
       const blob = await resp.blob();
@@ -93,7 +93,6 @@
       a.click();
       a.remove();
       URL.revokeObjectURL(objectUrl);
-
     } catch (e) {
       console.error('Download failed', e);
     }
@@ -102,12 +101,10 @@
   downloadBtn.addEventListener('click', downloadCurrent);
 })();
 
-
-
 /**
  * Add blog card preview form
  */
-(function() {
+(function () {
   const form = document.getElementById('demo-form');
   const urlInput = document.getElementById('blog-url');
   const layoutSelect = document.getElementById('layout');
@@ -129,7 +126,7 @@
   };
 
   // generate the HTML markdown code for blog card
-  const showHtmlCode = (hrefUrl, layout, theme) => {    
+  const showHtmlCode = (hrefUrl, layout, theme) => {
     if (!htmlCode) return;
 
     const imgSrc =
@@ -141,13 +138,13 @@
       '&theme=' +
       encodeURIComponent(theme);
 
-    const snippet =  `<a href="${hrefUrl}">
-      <img src="${imgSrc}" /></a>`
+    const snippet = `<a href="${hrefUrl}">
+      <img src="${imgSrc}" /></a>`;
 
     htmlCode.textContent = snippet;
   };
 
-  // render blog card and its HTML code 
+  // render blog card and its HTML code
   const render = () => {
     const url = urlInput.value.trim();
     const layout = layoutSelect.value;
@@ -179,19 +176,17 @@
 
   /* show default values */
   render();
-
 })();
-
 
 /**
  * Handle add new theme form
  */
-(function(){
+(function () {
   const addThemeBtn = document.getElementById('add-theme-btn');
-  const demoFormBtns = document.getElementById('demo-form-buttons')
+  const demoFormBtns = document.getElementById('demo-form-buttons');
   const cancelCreateBtn = document.getElementById('cancel-create');
   const htmlCodeSection = document.querySelector('.preview-url');
-  
+
   const newThemeForm = document.getElementById('new-theme-form');
   const newThemeName = document.getElementById('new-theme-name');
   const newThemeCodeSection = document.getElementById('new-theme-container');
@@ -224,7 +219,10 @@
     // Replace .title fill
     svgText = svgText.replace(/(\.title\s*\{[^}]*?fill:\s*)(#[0-9a-fA-F]{3,6})(\s*;)/, `$1${colors.title}$3`);
     // Replace .description fill
-    svgText = svgText.replace(/(\.description\s*\{[^}]*?fill:\s*)(#[0-9a-fA-F]{3,6})(\s*;)/, `$1${colors.description}$3`);
+    svgText = svgText.replace(
+      /(\.description\s*\{[^}]*?fill:\s*)(#[0-9a-fA-F]{3,6})(\s*;)/,
+      `$1${colors.description}$3`,
+    );
     // Replace .card-bg fill and stroke
     svgText = svgText.replace(/(\.card-bg\s*\{[^}]*?fill:\s*)(#[0-9a-fA-F]{3,6})(\s*;)/, `$1${colors.background}$3`);
     svgText = svgText.replace(/(\.card-bg\s*\{[^}]*?stroke:\s*)(#[0-9a-fA-F]{3,6})(\s*;)/, `$1${colors.stroke}$3`);
@@ -239,35 +237,35 @@
   // render the new theme preview card
   const renderPreview = async () => {
     try {
-        const urlInput = document.getElementById('blog-url');
-        const layoutSelect = document.getElementById('layout');
-        const previewImg = document.getElementById('card-preview');
-        
-        const blogUrl = urlInput.value.trim();
-        const layout = layoutSelect.value;
+      const urlInput = document.getElementById('blog-url');
+      const layoutSelect = document.getElementById('layout');
+      const previewImg = document.getElementById('card-preview');
 
-        if (blogUrl) {
-          const baseSvg = await fetchServerSvg(blogUrl, layout, 'default');
+      const blogUrl = urlInput.value.trim();
+      const layout = layoutSelect.value;
 
-          const colors = {
-            background: getTextValue('bg-color-text') || '#FDFDFF',
-            stroke: getTextValue('stroke-color-text') || '#E4E2E2',
-            title: getTextValue('title-color-text') || '#121212',
-            description: getTextValue('desc-color-text') || '#555555',
-            tagBackground: getTextValue('tag-bg-color-text') || '#F2F0EF',
-            tagTitle: getTextValue('tag-title-color-text') || '#333333',
-          };
+      if (blogUrl) {
+        const baseSvg = await fetchServerSvg(blogUrl, layout, 'default');
 
-          const themedSvg = applyColorsToSvg(baseSvg, colors);
+        const colors = {
+          background: getTextValue('bg-color-text') || '#FDFDFF',
+          stroke: getTextValue('stroke-color-text') || '#E4E2E2',
+          title: getTextValue('title-color-text') || '#121212',
+          description: getTextValue('desc-color-text') || '#555555',
+          tagBackground: getTextValue('tag-bg-color-text') || '#F2F0EF',
+          tagTitle: getTextValue('tag-title-color-text') || '#333333',
+        };
 
-          // Display via data URL
-          const dataUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(themedSvg);
-          previewImg.src = dataUrl;
-        }
+        const themedSvg = applyColorsToSvg(baseSvg, colors);
+
+        // Display via data URL
+        const dataUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(themedSvg);
+        previewImg.src = dataUrl;
+      }
     } catch (e) {
       console.error('Preview recolor failed', e);
     }
-  }
+  };
 
   // display new theme code
   const showThemeCode = () => {
@@ -283,17 +281,16 @@
         'tagBackground' => '${getTextValue('tag-bg-color-text') || '#FFFFFF'}',
         'tagTitle' => '${getTextValue('tag-title-color-text') || '#000000'}',
     ],`;
-     
-    
+
     htmlCodeSection.classList.add('hidden');
     newThemeCodeSection.classList.remove('hidden');
     document.getElementById('new-theme-code').textContent = code;
-  }
+  };
 
   // handle form submit
   newThemeForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    renderPreview(); 
+    renderPreview();
     showThemeCode();
   });
 
@@ -339,10 +336,9 @@
     newThemeCodeSection.classList.add('hidden');
 
     // reset theme form (name + colors)
-    resetThemeForm()
+    resetThemeForm();
 
     // reset blog card SVG
-    renderPreview()
+    renderPreview();
   });
-  
 })();

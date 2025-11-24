@@ -8,8 +8,8 @@
 }
 
 /* Light mode overrides */
-:root[data-theme="light"] {
-  --bg: #F3F6FA;
+:root[data-theme='light'] {
+  --bg: #f3f6fa;
   --panel: #ffffff;
   --text: #0f172a;
   --muted: #475569;
@@ -25,16 +25,23 @@
   padding: 0;
 }
 
-html, 
+html,
 body {
   min-height: 100%;
 }
 
 body {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family:
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    'Apple Color Emoji',
+    'Segoe UI Emoji';
   color: var(--text);
-  background:
-    radial-gradient(1200px 600px at 10% -10%, var(--panel) 0%, var(--panel) 80%, var(--bg) 100%);
+  background: radial-gradient(1200px 600px at 10% -10%, var(--panel) 0%, var(--panel) 80%, var(--bg) 100%);
   background-size: 100% 100%;
 }
 
@@ -50,7 +57,7 @@ body {
 }
 
 .demo-header h1 {
-  font-size: 1.35rem; 
+  font-size: 1.35rem;
 }
 
 .demo-header p {
@@ -74,14 +81,14 @@ body {
 
 @media (min-width: 640px) {
   .demo-header {
-    padding: 1.5em 1.5em 1em;  
+    padding: 1.5em 1.5em 1em;
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
   }
 
   .demo-header h1 {
-    font-size: 1.65rem; 
+    font-size: 1.65rem;
   }
 
   .demo-header p {
@@ -96,17 +103,17 @@ body {
 
 @media (min-width: 1440px) {
   .demo-header h1 {
-    font-size: 2rem; 
+    font-size: 2rem;
   }
 
   .theme-toggle {
-    font-size: 1.05rem
+    font-size: 1.05rem;
   }
 }
 
 @media (min-width: 2560px) {
   .demo-header h1 {
-    font-size: 2.25rem; 
+    font-size: 2.25rem;
   }
 
   .demo-header p {
@@ -114,7 +121,7 @@ body {
   }
 
   .theme-toggle {
-    font-size: 1.2rem
+    font-size: 1.2rem;
   }
 }
 
@@ -132,20 +139,20 @@ body {
   .demo-container {
     grid-template-columns: 1.15fr 1fr;
     padding: 1.5em 1em;
-  }  
+  }
 }
 
 @media (min-width: 2560px) {
   .demo-container {
     margin-top: 3em;
     padding: 2em 1.5em;
-  }  
+  }
 }
 
-.controls, .preview {
+.controls,
+.preview {
   border: 1px solid var(--border);
-   background:
-    radial-gradient(500px 500px at 100% 100%, var(--panel) 0%, var(--panel) 40%, var(--bg) 100%);
+  background: radial-gradient(500px 500px at 100% 100%, var(--panel) 0%, var(--panel) 40%, var(--bg) 100%);
   border-radius: 10px;
   padding: 1em;
 }
@@ -163,7 +170,8 @@ body {
   gap: 1em;
 }
 
-label, h2 {
+label,
+h2 {
   font-weight: 600;
   font-size: 0.85rem;
   color: var(--muted);
@@ -232,7 +240,7 @@ button#add-theme-btn {
 }
 
 .download-btn,
-.copy-btn  {
+.copy-btn {
   position: absolute;
   top: 0.75em;
   right: 0.75em;
@@ -243,13 +251,13 @@ button#add-theme-btn {
   font-size: 0.75rem;
 }
 
-:root[data-theme="dark"] :is(button.download-btn, button.copy-btn) {
+:root[data-theme='dark'] :is(button.download-btn, button.copy-btn) {
   background: #1f2542;
   border-color: var(--border);
   color: #e5e7eb;
 }
 
-:root[data-theme="light"] :is(button.download-btn, button.copy-btn) {
+:root[data-theme='light'] :is(button.download-btn, button.copy-btn) {
   background: linear-gradient(180deg, #eef2ff, #e0e7ff);
   color: #111827;
   border-color: #c7d2fe;
@@ -273,7 +281,7 @@ button:hover {
     display: flex;
     flex-direction: row;
     align-items: center;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     gap: 1em;
   }
 
@@ -283,14 +291,16 @@ button:hover {
 }
 
 @media (min-width: 1440px) {
-  .controls, .preview {
+  .controls,
+  .preview {
     padding: 1.5em 1em;
   }
 }
 
 @media (min-width: 2560px) {
-  .controls, .preview {
-    padding: 1.5em; 
+  .controls,
+  .preview {
+    padding: 1.5em;
   }
 
   .form-group {
@@ -298,7 +308,8 @@ button:hover {
     margin: 0 0 1.75em;
   }
 
-  label, h2 {
+  label,
+  h2 {
     font-size: 1rem;
   }
 
@@ -306,8 +317,8 @@ button:hover {
   input[type='url'],
   textarea,
   select {
-      padding: 13px 18px;
-      font-size: 1.05rem;
+    padding: 13px 18px;
+    font-size: 1.05rem;
   }
 
   button {
@@ -319,7 +330,7 @@ button:hover {
   }
 
   button.download-btn,
-  button.copy-btn  {
+  button.copy-btn {
     font-size: 0.85rem;
   }
 }
@@ -365,7 +376,7 @@ h2 {
 }
 
 .preview-url h2 {
-  font-size: 1rem; 
+  font-size: 1rem;
 }
 
 @media (min-width: 424px) {
@@ -375,7 +386,7 @@ h2 {
 }
 
 @media (min-width: 2560px) {
-   h2 {
+  h2 {
     font-size: 1.05rem;
   }
 
@@ -406,7 +417,7 @@ h2 {
   gap: 0.5em;
 }
 
-input[type="color"] {
+input[type='color'] {
   -webkit-appearance: none;
   appearance: none;
   width: 40px;
@@ -419,24 +430,24 @@ input[type="color"] {
   flex-shrink: 0;
 }
 
-input[type="color"]::-webkit-color-swatch-wrapper {
+input[type='color']::-webkit-color-swatch-wrapper {
   padding: 0;
   border-radius: 10px;
 }
 
-input[type="color"]::-webkit-color-swatch {
+input[type='color']::-webkit-color-swatch {
   border: none;
   border-radius: 10px;
 }
 
-input[type="color"]::-moz-color-swatch {
+input[type='color']::-moz-color-swatch {
   border: none;
   border-radius: 10px;
 }
 
 @media (min-width: 640px) {
   .color-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)); 
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0 1em;
   }
 }
@@ -466,7 +477,7 @@ input[type="color"]::-moz-color-swatch {
 
 .code-block {
   color: var(--text);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
   font-size: 0.75rem;
   white-space: pre-wrap;
   word-break: break-word;
@@ -476,8 +487,8 @@ input[type="color"]::-moz-color-swatch {
 .code-instructions {
   margin-top: 1em;
   color: var(--muted);
-  font-size: 0.95rem; 
-  line-height: 1.65; 
+  font-size: 0.95rem;
+  line-height: 1.65;
 }
 
 .code-instructions .instructions-title {
@@ -496,20 +507,20 @@ input[type="color"]::-moz-color-swatch {
 }
 
 .file-chip {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 0.85rem; 
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.85rem;
   background: rgba(253, 230, 138, 0.5);
-  color: #92400e; 
-  padding: 2px 6px; 
-  border-radius: 8px; 
-  border: 1px solid rgba(252, 211, 77, 0.5); 
-  user-select: all; 
+  color: #92400e;
+  padding: 2px 6px;
+  border-radius: 8px;
+  border: 1px solid rgba(252, 211, 77, 0.5);
+  user-select: all;
   cursor: pointer;
 }
 
-:root[data-theme="dark"] .file-chip {
-   background: rgb(252, 211, 77); 
-   color: #8c4d26; 
+:root[data-theme='dark'] .file-chip {
+  background: rgb(252, 211, 77);
+  color: #8c4d26;
 }
 
 @media (min-width: 424px) {

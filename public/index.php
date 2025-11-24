@@ -2,6 +2,8 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../src/Card.php';
+require_once __DIR__ . './../src/error/ErrorCard.php';
+require_once __DIR__ . './../src/error/URLValidator.php';
 
 // Ignore favicon requests from browsers
 if ($_SERVER['REQUEST_URI'] === '/favicon.ico') {
@@ -12,9 +14,12 @@ if ($_SERVER['REQUEST_URI'] === '/favicon.ico') {
 // Set default blog URL if 'url' param is missing or empty
 $blogURL = isset($_GET['url']) && $_GET['url'] !== '' ? $_GET['url'] : null;
 
-if (!$blogURL) {
-    http_response_code(400);
-    echo "Missing 'url' parameter";
+// Validate URL
+$validator = new URLValidator($blogURL);
+
+if (!$validator->validate()) {
+    $errorCard = new ErrorCard($validator->getError(), 400);
+    $errorCard->render();
     exit();
 }
 
