@@ -9,7 +9,9 @@ RUN apt-get update && apt-get install -y \
     libwebp-dev \
     && docker-php-ext-configure gd --with-jpeg --with-webp \
     && docker-php-ext-install gd \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    && apt-get purge -y --auto-remove \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* /usr/share/man/*
 
 # Install Composer globally
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -23,12 +25,13 @@ COPY src/ /var/www/src/
 
 # Copy composer files and install dependencies
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --optimize-autoloader --no-interaction \
+    && composer clear-cache \
+    && rm -rf /root/.composer/cache
 
 # Permissions and Apache setup
-RUN chown -R www-data:www-data /var/www/html /var/www/src
-RUN a2enmod rewrite
-
+RUN chown -R www-data:www-data /var/www/html /var/www/src \
+    && a2enmod rewrite
 
 # Expose port 80
 EXPOSE 80
