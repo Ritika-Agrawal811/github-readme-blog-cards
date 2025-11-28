@@ -41,9 +41,9 @@ $etag = md5($blogURL . $theme . $layout);
 
 // Set headers
 header('Content-Type: image/svg+xml');
-// header('Cache-Control: public, max-age=432000'); // 5 days
-// header('Etag: "' . $etag . '"');
-// header('Last-Modified: ' . gmdate('D, d M Y H:i:s', strtotime('-1 hour')) . ' GMT');
+header('Cache-Control: public, max-age=432000'); // 5 days
+header('Etag: "' . $etag . '"');
+header('Last-Modified: ' . gmdate('D, d M Y H:i:s', strtotime('-1 hour')) . ' GMT');
 
 // Handle If-None-Match for 304 responses
 if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] === '"' . $etag . '"') {

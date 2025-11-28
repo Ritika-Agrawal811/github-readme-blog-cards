@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/text/TextFormatter.php';
 require_once __DIR__ . '/theme/Theme.php';
+require_once __DIR__ . '/error/ErrorCard.php';
 
 class Card
 {
@@ -82,12 +83,14 @@ class Card
         if ($escapedURL) {
             $html = $this->fetchHTML($escapedURL);
 
-            if ($html) {
-                $meta = $this->extractMetadata($html);
-                return $this->compressSVG($meta);
-            } else {
-                echo 'Could not fetch the URL.';
+            if (!$html) {
+                $errorCard = new ErrorCard('Failed to extra blog metadata', 400);
+                $errorCard->render();
+                exit();
             }
+
+            $meta = $this->extractMetadata($html);
+            return $this->compressSVG($meta);
         }
     }
 
