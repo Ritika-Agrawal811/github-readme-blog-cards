@@ -63,12 +63,12 @@ class ErrorCard
             }
 
             .error-title {
-                font: bold 24px sans-serif;
+                font: bold 22px sans-serif;
                 fill: #121212;
             }
 
             .error-message {
-                font: 400 15px sans-serif;
+                font: 400 14px sans-serif;
                 fill: #555555;
             }
         </style>
@@ -76,8 +76,8 @@ class ErrorCard
         <rect class='error-card' x='0' y='0' width='{$width}' height='{$height}' rx='10' ry='10'/>
         
         <!-- Error Icon (Circle with X) -->
-        <circle class='error-icon-bg' cx='125' cy='80' r='45'/> 
-        <circle class='error-icon' cx='125' cy='80' r='25'/>
+        <circle class='error-icon-bg' cx='125' cy='80' r='40'/> 
+        <circle class='error-icon' cx='125' cy='80' r='20'/>
         <line stroke='#fff' stroke-width='3' stroke-linecap='round' x1='115' y1='70' x2='135' y2='90'/>
         <line stroke='#fff' stroke-width='3' stroke-linecap='round' x1='135' y1='70' x2='115' y2='90'/> 
         

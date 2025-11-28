@@ -90,6 +90,7 @@ class Card
             }
 
             $meta = $this->extractMetadata($html);
+            $this->validateMetadata($meta);
             return $this->compressSVG($meta);
         }
     }
@@ -169,13 +170,30 @@ class Card
         }
 
         return [
-            'title' => $tags['og:title'] ?? ($title ?? 'No title found'),
-            'description' => $tags['og:description'] ?? ($tags['description'] ?? 'No description'),
+            'title' => $tags['og:title'] ?? ($title ?? null),
+            'description' => $tags['og:description'] ?? ($tags['description'] ?? null),
             'image' => $tags['og:image'] ?? null,
             'site_name' => $siteName,
             'favicon' => $favicon,
-            'published_date' => $tags['article:published_time'] ?? ($tags['last-updated'] ?? 'No date'),
+            'published_date' => $tags['article:published_time'] ?? ($tags['last-updated'] ?? null),
         ];
+    }
+
+    /**
+     * Validate blog metadata
+     *
+     * @param array<string,string> blog metadata
+     *
+     */
+    private function validateMetadata($meta)
+    {
+        foreach ($meta as $key => $value) {
+            if (!$value) {
+                $errorCard = new ErrorCard('Faulty URL : ' . $key . ' is empty.', 400);
+                $errorCard->render();
+                exit();
+            }
+        }
     }
 
     /**
@@ -186,6 +204,8 @@ class Card
      */
     private function compressSVG($meta)
     {
+        error_log('META: ' . json_encode($meta, JSON_PRETTY_PRINT));
+
         $svgContent = $this->generateSVG($meta);
 
         // Remove unnecessary whitespace but keep structure
