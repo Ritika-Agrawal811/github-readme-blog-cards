@@ -2,40 +2,40 @@
 
                 .title {
                     font: bold 14px sans-serif;
-                    fill: #F8F8F2;
+                    fill: #1F2328;
                 }
 
                 .description {
                     font: 12px sans-serif;
-                    fill: #BD93F9;
+                    fill: #4B5563;
                 }
 
                 .card-bg {
-                    fill: #282A36;
-                    stroke: #44475A;
+                    fill: #F6F8FA;
+                    stroke: #D0D7DE;
                     stroke-width: 2;
                     rx: 10;
                     ry: 10;
                 }
 
                 .tag {
-                  fill: #44475A;
+                  fill: #E4E7EB;
                   rx: 6; 
                   ry: 6; 
                 }
 
                 .tagTitle {
                     font: bold 12px sans-serif;
-                    fill: #FF79C6;
+                    fill: #374151;
                 }
 
                 .published_date {
                     font: 400 12px sans-serif;
-                    fill: #BD93F9;
+                    fill: #4B5563;
                 }
                 
                 .clock-icon {
-                    stroke: #BD93F9;
+                    stroke: #4B5563;
                     stroke-width: 1.2;
                 }
 
