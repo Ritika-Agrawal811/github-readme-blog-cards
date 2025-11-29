@@ -36,7 +36,7 @@
 </a>
 ```
 
-<img src='https://res.cloudinary.com/djix6uusx/image/upload/v1754739171/blog-card-demo_qckoao.png' width='250' height='300'/>
+<img src='/images/themes/default.svg' width='250' height='300'/>
 
 <br/>
 
@@ -45,6 +45,8 @@
 Here you can customize your blog card with a live preview.
 
 <https://github-readme-blog-cards.onrender.com/demo>
+
+<img src="images/demo.gif">
 
 <br/>
 
@@ -73,10 +75,10 @@ To use a **layout**, append `&layout=` followed by layout value available at the
 
 <br/>
 
-|           Layout           |                                                                 Preview                                                                  |
-| :------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------: |
-| `vertical` <br/> (default) |   <br/> <img src='https://res.cloudinary.com/djix6uusx/image/upload/v1754739171/blog-card-demo_qckoao.png' width='250' height='300'/>    |
-|        `horizontal`        | <br/> <img src='https://res.cloudinary.com/djix6uusx/image/upload/v1754739711/blog-card-horizontal_f1ctcz.jpg' width='385' height='110'> |
+|           Layout           |                                 Preview                                  |
+| :------------------------: | :----------------------------------------------------------------------: |
+| `vertical` <br/> (default) | <br/> <img src='/images/layout/vertical.svg' width='250' height='300'/>  |
+|        `horizontal`        | <br/> <img src='/images/layout/horizontal.svg' width='385' height='110'> |
 
 <br/>
 
@@ -92,19 +94,20 @@ To use a **theme**, append `&theme=` followed by a theme value available at the 
 
 <br/>
 
-|           Theme           |                                                                  Preview                                                                  |
-| :-----------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: |
-| `default` <br/> (default) |    <br/> <img src='https://res.cloudinary.com/djix6uusx/image/upload/v1754739171/blog-card-demo_qckoao.png' width='250' height='300'/>    |
-|          `sunny`          |   <br/> <img src='https://res.cloudinary.com/djix6uusx/image/upload/v1754739940/blog-card-sunny_y8cubp.png' width='250' height='300'/>    |
-|       `light-gray`        | <br/> <img src="https://res.cloudinary.com/djix6uusx/image/upload/v1754740352/blog-card-light-gray_pk0bsm.png" width='250' height='300'/> |
-|         `pastel`          |  <br/> <img src="https://res.cloudinary.com/djix6uusx/image/upload/v1754740826/blog-card-pastel_izphr2.png" width='250' height='300' />   |
-|          `mint`           |   <br/> <img src="https://res.cloudinary.com/djix6uusx/image/upload/v1754740745/blog-card-mint_o1i1ms.png" width='250' height='300' />    |
-|         `copper`          |  <br/> <img src="https://res.cloudinary.com/djix6uusx/image/upload/v1754742314/blog-card-copper_csmue1.png" width='250' height='300' />   |
-|          `dark`           |    <br/> <img src="https://res.cloudinary.com/djix6uusx/image/upload/v1754740660/blog-card-dark_ovjasp.png" width='250' height='300'/>    |
-|         `carbon`          |  <br/> <img src="https://res.cloudinary.com/djix6uusx/image/upload/v1754741699/blog-card-carbon_hd2jg7.png" width='250' height='300' />   |
-|         `dracula`         |                                  <br/> <img src="images/themes/dracula.svg" width='240' height='300' />                                   |
-|         `cosmic`          |                                   <br/> <img src="images/themes/cosmic.svg" width='240' height='300' />                                   |
-|          `ocean`          |                                   <br/> <img src="images/themes/ocean.svg" width='240' height='300' />                                    |
+|           Theme           |                                  Preview                                  |
+| :-----------------------: | :-----------------------------------------------------------------------: |
+| `default` <br/> (default) |  <br/> <img src='/images//themes/default.svg' width='250' height='300'/>  |
+|          `sunny`          |   <br/> <img src='/images/themes/sunny.svg' width='250' height='300'/>    |
+|       `light-gray`        | <br/> <img src="/images/themes/light-gray.svg" width='250' height='300'/> |
+|         `pastel`          |  <br/> <img src="/images/themes/pastel.svg" width='250' height='300' />   |
+|          `mint`           |   <br/> <img src="/images/themes/mint.svg" width='250' height='300' />    |
+|         `copper`          |  <br/> <img src="/images/themes/copper.svg" width='250' height='300' />   |
+|          `dark`           |    <br/> <img src="/images/themes/dark.svg" width='250' height='300'/>    |
+|         `carbon`          |  <br/> <img src="/images/themes/carbon.svg" width='250' height='300' />   |
+|         `dracula`         |  <br/> <img src="images/themes/dracula.svg" width='250' height='300' />   |
+|         `cosmic`          |   <br/> <img src="images/themes/cosmic.svg" width='250' height='300' />   |
+|          `ocean`          |   <br/> <img src="images/themes/ocean.svg" width='250' height='300' />    |
+|       `linux-user`        | <br/> <img src="images/themes/linux-user.svg" width='250' height='300' /> |
 
 <br/>
 
