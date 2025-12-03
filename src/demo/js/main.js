@@ -158,6 +158,11 @@
     showHtmlCode(url, layout, theme);
   };
 
+  [urlInput, layoutSelect, themeSelect].forEach((el) => {
+    el.addEventListener('change', render);
+    el.addEventListener('input', render);
+  });
+
   // handle form submit
   form.addEventListener('submit', (e) => {
     e.preventDefault();

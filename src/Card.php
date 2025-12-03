@@ -83,11 +83,6 @@ class Card
         if ($escapedURL) {
             $html = $this->fetchHTML($escapedURL);
 
-            // Add debugging
-            error_log("URL: $escapedURL");
-            error_log('HTML Length: ' . strlen($html ?? ''));
-            error_log('HTML Preview: ' . substr($html ?? '', 0, 500));
-
             if (!$html) {
                 $errorCard = new ErrorCard('Failed to extract blog metadata', 400);
                 $errorCard->render();
@@ -95,9 +90,6 @@ class Card
             }
 
             $meta = $this->extractMetadata($html);
-
-            // Debug metadata extraction
-            error_log('Extracted metadata: ' . json_encode($meta));
 
             $this->validateMetadata($meta);
             return $this->compressSVG($meta);
@@ -122,20 +114,32 @@ class Card
                     'Connection: keep-alive',
                     'Upgrade-Insecure-Requests: 1',
                 ]),
-                'timeout' => 10,
-            ],
-            'ssl' => [
-                'verify_peer' => false,
-                'verify_peer_name' => false,
+                'timeout' => 5,
             ],
         ]);
-        
-        $html = @file_get_contents($url, false, $context);
-        if ($html) {
-            $html = html_entity_decode($html, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+        $fp = @fopen($url, 'r', false, $context);
+        if (!$fp) {
+            return null;
         }
 
-        return $html ?: null;
+        $buffer = '';
+        while (!feof($fp)) {
+            $line = stream_get_line($fp, 4096, "\n");
+            if ($line === false) {
+                break;
+            }
+
+            $buffer .= $line . "\n";
+
+            // Stop once </head> is found
+            if (stripos($buffer, '</head>') !== false) {
+                break;
+            }
+        }
+        fclose($fp);
+
+        return $buffer ?: null;
     }
 
     /**
@@ -226,8 +230,6 @@ class Card
      */
     private function compressSVG($meta)
     {
-        error_log('META: ' . json_encode($meta, JSON_PRETTY_PRINT));
-
         $svgContent = $this->generateSVG($meta);
 
         // Remove unnecessary whitespace but keep structure
