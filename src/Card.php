@@ -83,13 +83,22 @@ class Card
         if ($escapedURL) {
             $html = $this->fetchHTML($escapedURL);
 
+            // Add debugging
+            error_log("URL: $escapedURL");
+            error_log('HTML Length: ' . strlen($html ?? ''));
+            error_log('HTML Preview: ' . substr($html ?? '', 0, 500));
+
             if (!$html) {
-                $errorCard = new ErrorCard('Failed to extra blog metadata', 400);
+                $errorCard = new ErrorCard('Failed to extract blog metadata', 400);
                 $errorCard->render();
                 exit();
             }
 
             $meta = $this->extractMetadata($html);
+
+            // Debug metadata extraction
+            error_log('Extracted metadata: ' . json_encode($meta));
+
             $this->validateMetadata($meta);
             return $this->compressSVG($meta);
         }
@@ -105,9 +114,22 @@ class Card
     {
         $context = stream_context_create([
             'http' => [
-                'header' => "User-Agent: PHP\r\n",
+                'method' => 'GET',
+                'header' => implode("\r\n", [
+                    'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                    'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                    'Accept-Language: en-US,en;q=0.5',
+                    'Connection: keep-alive',
+                    'Upgrade-Insecure-Requests: 1',
+                ]),
+                'timeout' => 10,
+            ],
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
             ],
         ]);
+        
         $html = @file_get_contents($url, false, $context);
         if ($html) {
             $html = html_entity_decode($html, ENT_QUOTES | ENT_HTML5, 'UTF-8');
